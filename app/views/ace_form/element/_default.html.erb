@@ -1,0 +1,15 @@
+<div class="col-sm-12 form-group">
+  <div class="col-sm-2 form-name">
+    <%= input.label.try(:html_safe) %>
+    <% if input.required %>
+      <span class="text-danger">*</span>
+    <% end %>
+  </div>
+  <div class="col-sm-5 form-input">
+    <%= input.output%>
+    <%= block.try(:call)  %>
+  </div>
+  <div class="col-sm-5 form-desc">
+    <%= input.desc.try(:html_safe) %>
+  </div>
+</div>

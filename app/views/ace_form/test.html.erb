@@ -1,0 +1,48 @@
+<%= ace_from({code: 'user', html: {class: 'my-form'}}) do |f| %>
+
+  <%= ace_input({label: '姓名', code: 'user_name', name: 'user[name]', type: :string, desc: '请填写真实姓名'}) %>
+
+  <%= ace_input({label: '年龄', code: 'user_age', name: 'user[age]', type: :integer,
+                 desc: '20-66之间的数字', min: 20, max: 66}) %>
+
+  <%= ace_input({label: '身高', code: 'user_height', name: 'user[height]', type: :integer, desc: '单位(mm)'}) %>
+
+  <%= ace_input({label: '体重', code: 'user_weight', name: 'user[weight]', type: :float, desc: '单位(kg)'}) %>
+
+  <%= ace_input({label: '身高体重比', code: 'user_h_w', name: 'user[h_w]', type: :calculate, desc: '测试数值计算',
+                 required: true, formula: 'height/weight', value_format: :integer}) %>
+
+  <%= ace_input({label: '生日', code: 'user_birthday', name: 'user[birthday]', type: :date, desc: '出生日期', value: '08:00'}) %>
+
+  <%= ace_input({label: '起床时间', code: 'user_time_in_the_bed', name: 'user[out_time]', type: :time, desc: '睡觉时间'}) %>
+
+  <%= ace_input({label: '睡觉时间', code: 'user_time_in_the_bed', name: 'user[in_time]', type: :time, desc: '睡觉时间'}) %>
+
+  <%= ace_input({label: '工作时间', code: 'user_work_time', name: 'user[work_time]', type: :calculate, desc: '测试时间计算',
+                 required: true, formula: 'in_time - out_time', value_format: :time}) %>
+
+  <%= ace_input({label: '共产党员', code: 'user_gong_chan', name: 'user[gong_chan]', type: :boolean, desc: '是否共产党员',
+                 require: true }) %>
+
+  <%= ace_input({label: '性别单选选框', code: 'user_gong_chan', name: 'user[sex]', type: :radio, desc: '暂不支持其他',
+                 collection: {'man' => '男', 'woman' => '女'}, required: true }) %>
+
+  <%= ace_input({label: '爱好必选', code: 'user_gong_chan', name: 'user[sex]', type: :checkbox, desc: '暂不支持其他',
+                 collection: {'0' => '足球', '1' => '篮球', '2' => '其他'}, required: true }) %>
+  <%= ace_input({label: '爱好(任选)', code: 'user_lin', name: 'user[sex]', type: :checkbox, desc: '暂不支持其他',
+                 collection: {'0' => '足球', '1' => '篮球', '2' => '其他'} }) %>
+  <%= ace_input({label: '性别单项选择', code: 'user_sexes', name: 'user[sex]', type: :choose, desc: '暂不支持其他',
+                 collection: {'man' => '男', 'woman' => '女'}, required: true }) %>
+
+  <%= ace_input({label: '喜欢的食物', code: 'user_food', name: 'user[sex]', type: :multiple_choose, desc: '暂不支持其他',
+                 collection: {'rice' => '大米', 'mail' => '牛奶', 'apple' => '苹果'}, placeholder: '请选择一种食物'}) %>
+  <%= ace_input({label: '喜欢的食物(必选)', code: 'user_like_food', name: 'user[sex]', type: :multiple_choose, desc: '暂不支持其他',
+                 collection: {'rice' => '大米', 'mail' => '牛奶', 'apple' => '苹果'}, required: true}) %>
+
+  <%= ace_input({label: '个人介绍', code: 'user_desc', name: 'user[desc]', type: :text, desc: '暂不支持其他',
+                 required: true, }) %>
+
+    <%= ace_input({label: '介绍详情', code: 'user_desc', name: 'user[desc]', type: :rich_text, desc: '暂不支持其他',
+                   required: true, }) %>
+<% end %>
+

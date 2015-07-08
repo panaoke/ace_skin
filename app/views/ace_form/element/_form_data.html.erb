@@ -1,0 +1,19 @@
+<div class="col-sm-12 form-data-group">
+  <div class="col-sm-2 form-data-name">
+    <%= input.label.try(:html_safe) %>
+    <% if input.required %>
+      <span class="text-danger">*</span>
+    <% end %>
+  </div>
+  <div class="col-sm-4 form-data-input">
+    <%= input.output%>
+    <%= block.try(:call)  %>
+  </div>
+  <div class="col-sm-5 form-data-desc">
+    <%= input.desc.try(:html_safe) %>
+  </div>
+  <div class="col-sm-1 form-data-remark">
+    <a class="icon-plus input-title collapsed" data-toggle="collapse" href="#<%= input.dom_id%>_remark_ext">
+    </a>
+  </div>
+</div>

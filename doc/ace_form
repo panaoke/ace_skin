@@ -1,0 +1,50 @@
+ace表单配置说明
+
+  ace_form
+    - form
+    - element
+form配置
+  {
+    name: 'activity',                       # 表单的code
+    html: {
+      action: '/activity_fab/activities',   # 表单提交的请求地址
+    },
+    template: 'default',                    # 表的展现模版,默认 'default'
+    option: {}                              # 预留参数
+  }
+
+element基本配置
+    {
+      prefix: 前缀code, string
+      code: 字段的标识符, string,
+      label: 字段名称, html,
+      type: 输入元素的类型, 默认string, 目前支持 boolean, calculate, checkbox, choose, date, float, hidden, integer,
+                                                 multiple_choose, photo, radio, text, time
+      template: 展现的模版, string, 默认采用default, 可在app/views/layouts/ace_form/element,
+      desc: 字段描述的文字, html,
+      validation: 验证信息, string
+      disabled: (是否可编辑, enum, [true => "不可编辑", false => "可编辑"], default: false)
+      value: 输入元素初始值,
+      html: dom元素的一些属性, hash,
+      required: (是否必填, enum, [true => "必填", false => "非必填"], default: false),
+      placeholder: input框中的欲输入文字, string
+    }
+ 一些类型的单独配置
+
+     calculate:
+     {
+      formula: 计算公示, string
+     }
+
+     radio, checkbox, boolean, choose, multiple_choose
+     {
+      collection: 子元素, hash or array,
+     }
+
+     integer, float
+     {
+      min: 最小值, num
+      max: 最大值, num
+      value: default => 0,
+     }
+

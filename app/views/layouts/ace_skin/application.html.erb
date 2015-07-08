@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AceSkin</title>
+  <%= stylesheet_link_tag    "ace_skin/application", :media => "all" %>
+  <%= javascript_include_tag "ace_skin/application" %>
+
+  <meta name="description" content="overview &amp; stats" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--&lt;!&ndash; basic styles &ndash;&gt;-->
+
+  <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!--<link rel="stylesheet" href="assets/css/font-awesome.min.css" />-->
+
+  <!--&lt;!&ndash;[if IE 7]>-->
+  <!--<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />-->
+  <!--<![endif]&ndash;&gt;-->
+
+  <!--&lt;!&ndash; page specific plugin styles &ndash;&gt;-->
+
+  <!--&lt;!&ndash; fonts &ndash;&gt;-->
+
+  <!--<link rel="stylesheet" href="assets/css/ace-fonts.css" />-->
+
+  <!--&lt;!&ndash; ace styles &ndash;&gt;-->
+
+  <!--<link rel="stylesheet" href="assets/css/ace.min.css" />-->
+  <!--<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />-->
+  <!--<link rel="stylesheet" href="assets/css/ace-skins.min.css" />-->
+
+  <!--&lt;!&ndash;[if lte IE 8]>-->
+  <!--<link rel="stylesheet" href="assets/css/ace-ie.min.css" />-->
+  <!--<![endif]&ndash;&gt;-->
+
+  <!--&lt;!&ndash; inline styles related to this page &ndash;&gt;-->
+
+  <!--&lt;!&ndash; ace settings handler &ndash;&gt;-->
+
+  <!--<script src="assets/js/ace-extra.min.js"></script>-->
+
+  <!--&lt;!&ndash; HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+
+  <!--&lt;!&ndash;[if lt IE 9]>-->
+  <!--<script src="assets/js/html5shiv.js"></script>-->
+  <!--<script src="assets/js/respond.min.js"></script>-->
+  <!--<![endif]&ndash;&gt;-->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

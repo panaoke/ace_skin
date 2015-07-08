@@ -1,0 +1,30 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require ace_skin/bootstrap.css
+ *= require ace_skin/font-awesome.css
+ *= require ace_skin/jquery-ui-1.10.3.custom.css
+ *= require ace_skin/chosen.css
+ *= require ace_skin/datepicker.css
+ *= require ace_skin/bootstrap-timepicker.css
+ *= require ace_skin/daterangepicker.css
+ *= require ace_skin/colorbox.css
+ *= require ace_skin/ui.jqgrid.css
+ *= require ace_skin/ace-fonts.css
+ *= require ace_skin/ace.css
+ *= require ace_skin/ace-rtl.css
+ *= require ace_skin/shop.css
+ *= require ace_skin/ace-skins.css
+ *= require ace_skin/fullcalendar.css
+ *= require ace_skin/jqGrid.css
+ *= require ace_skin/ace-ext.css
+ */
+

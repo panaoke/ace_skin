@@ -1,0 +1,57 @@
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.ace-form  .input-group {
+    margin-top: 20px;
+}
+.ace-form {
+    margin-bottom: 60px;
+    width: 100%;
+    display: table;
+}
+input[type=checkbox].ace + .lbl::before, input[type=radio].ace + .lbl::before {
+    color: #46AD09;
+}
+input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled + .lbl::before, input[type=checkbox].ace[disabled] + .lbl::before, input[type=radio].ace[disabled] + .lbl::before, input[type=checkbox].ace.disabled + .lbl::before, input[type=radio].ace.disabled + .lbl::before {
+    color: #A0F88A;
+}
+.wysiwyg-style1 .btn-group, .wysiwyg-style2 .btn-group {
+    float: left;
+}
+.wysiwyg-toolbar .btn-colorpicker {
+    width: 20px;
+    height: 20px;
+}
+.wysiwyg-editor {
+     overflow-y: inherit;
+}
+.wysiwyg-editor:after {
+    display: block;
+    content: " ";
+    border-top: 1px solid rgb(62, 62, 62);
+}
+.searchFilter {
+    display: none !important;
+}
+.ace-form .text-danger {
+    position: absolute;
+    right: 0;
+}
+.modal-dialog .modal-body {
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 0;
+}

@@ -1,0 +1,11 @@
+<%#该Partial接受输入：sidebar => Side Bar Name%>
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <% side_bar.each do |group| %>
+      <li class="nav-header"><%=group.label%></li>
+      <% group.each do |link| %>
+        <li <%= side_bar.selected?(group) and group.selected?(link) ? raw("class='active'") : ""%>><a href='<%=link.url%>'><%=link.label%></a></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+<%#该Partial文件接受的输入为: group => Link Group的名称%>
+<%link_group = MenuLoader.instance.link_groups[group]%>
+<div id="helpbarDiv" style="height: 546px;">
+  <div class="nestedModule">
+    <div class="sidebarModule nestedModuleInner">
+      <div class="sidebarModuleHeader"><h2><%=link_group.label%></h2></div>
+      <div class="sidebarModuleBody">
+        <ul>
+          <%link_group.links.each do |link|%>
+          <li><%=link%></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+  <%msg_tips_visibility = flash[:message].nil? ? 'display:none' : 'display:block'%>
+  <div style="<%=msg_tips_visibility%>" class="message-tips clearfix" id="message-tips">
+    <div class="close-tips"><a onclick="Page.Tip.close();" href="#"></a></div>
+    <div id="tip-rows">
+      <%=flash[:message]%>
+      <%flash[:message] = nil%>
+    </div>
+  </div>

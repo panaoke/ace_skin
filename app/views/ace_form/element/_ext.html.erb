@@ -1,0 +1,9 @@
+<div class="col-sm-6">
+  <div class="col-sm-2 form-data-remark-name">
+    <%= input.label.try(:html_safe) %>
+  </div>
+  <div class="col-sm-4 form-data-remark-content">
+    <%= input.output%>
+    <%= block.try(:call)  %>
+  </div>
+</div>

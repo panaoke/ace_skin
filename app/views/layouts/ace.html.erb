@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title><%#= theme_title %></title>
+    <meta charset="utf-8" />
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <%=stylesheet_link_tag "ace_skin/application"%>
+    <%=stylesheet_link_tag "application"%>
+
+
+    <%=javascript_include_tag "ace_skin/jquery-2.0.3"%>
+    <%=javascript_include_tag "ace_skin/i18n"%>
+    <script>
+//        获取javascript的中英文配置信息
+//        i18n.set_config(<%#= raw javascript_i18n.to_json%>, '<%#= locale%>');
+
+    </script>
+
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "ace_skin/application" %>
+    <%= javascript_include_tag "http://api.map.baidu.com/api?v=1.4" %>
+
+    <%= csrf_meta_tag %>
+    <link rel="shortcut icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <%=render(:partial=>"ace/app_head")%>
+    <%=render(:partial=>"ace/app_page")%>
+  </body>
+</html>
+<script>
+    $(function(){
+        $('body').extPlugins();
+    });
+</script>
+
