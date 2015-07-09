@@ -13,13 +13,20 @@
 .text-center {
     text-align: center;
 }
-.ace-form  .input-group {
-    margin-top: 20px;
-}
 .ace-form {
     margin-bottom: 60px;
     width: 100%;
     display: table;
+    margin-top: 20px;
+}
+.ace-form .ace-input {
+    width: 200px;
+    height: 28px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.ace-form .input-group {
+    width: 200px;
 }
 input[type=checkbox].ace + .lbl::before, input[type=radio].ace + .lbl::before {
     color: #46AD09;
@@ -34,10 +41,13 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
     width: 20px;
     height: 20px;
 }
-.wysiwyg-editor {
-     overflow-y: inherit;
+.ace-form .wysiwyg-editor {
+    overflow-y: inherit;
+    max-height: 250px;
+    width: initial;
+    height: 250px;
 }
-.wysiwyg-editor:after {
+.ace-form .wysiwyg-editor:after {
     display: block;
     content: " ";
     border-top: 1px solid rgb(62, 62, 62);
@@ -55,3 +65,10 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
     overflow-x: hidden;
     padding-bottom: 0;
 }
+.ace-form .wysiwyg-style2 {
+    padding-left: 4px;
+}
+.ace-form .form-group > div {
+    line-height: 28px;
+}
+

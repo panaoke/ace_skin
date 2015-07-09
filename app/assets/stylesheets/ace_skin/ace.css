@@ -11060,7 +11060,7 @@ ul.attachment-list > li {
     color: #777;
 }
 .ace-spinner input[type=text].spinner-input.form-control {
-    width: auto !important;
+    width: 182px;
     line-height: 1 !important;
     padding-bottom: 4px !important;
 }

@@ -1,7 +1,6 @@
 AceSkin::Engine.routes.draw do
 
-  get 'icons' => 'application#icons'
-
-  get 'form_test' => 'application#form_test'
+    get 'icons', to: 'application#icons'
+    get 'form_test', to: 'application#form_test'
 
 end
