@@ -63,7 +63,7 @@ module AceSkin
         end
 
         def view_action(id, index = nil)
-          I18n.t("activerecord.actions.#{id}", :raise => true) rescue id.to_s.humanize
+          I18n.t("actions.#{id}", :raise => true) rescue id.to_s.humanize
         end
 
       end
