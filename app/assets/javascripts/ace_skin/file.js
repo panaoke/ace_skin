@@ -23,18 +23,49 @@
         self.initPhoto = function() {
             var $div = $("<div class='ace-thumbnails'></div>");
 
-            $.each(self.contentValues(), function(i, content) {
+            //$.each(self.contentValues(), function(i, url) {
+            //
+            //    var $a = $("<a href=" + url + "  data-rel='colorbox'></a>");
+            //
+            //    var $img = $("<img src=" + url + " class='input-image'>");
+            //
+            //    $a.append($img);
+            //    $div.append($a);
+            //});
+            var fileInput = $('<input type="file" name="ace_file">');
+            fileInput.data('urls', self.$element.val());
+            self.$element.parent().append(fileInput);
+            fileInput.ace_file_input({
+                style:'well',
+                btn_choose:'点击或拖动文件上传',
+                btn_change: '点击或拖动文件上传',
+                no_icon:'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail:'small'//large | fit
+                //,icon_remove:null//set null, to hide remove/reset button
+                /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+                /**,before_remove : function() {
+						return true;
+					}*/
+                ,
+                preview_error : function(filename, error_code) {
+                    //name of the file that failed
+                    //error_code values
+                    //1 = 'FILE_LOAD_FAILED',
+                    //2 = 'IMAGE_LOAD_FAILED',
+                    //3 = 'THUMBNAIL_FAILED'
+                    //alert(error_code);
+                }
 
-                var url = Content.accessibleUrl(content);
-
-                var $a = $("<a href=" + url + "  data-rel='colorbox'></a>");
-
-                var $img = $("<img src=" + url + " class='input-image'>");
-
-                $a.append($img);
-                $div.append($a);
+            }).on('changeUrl', function(){
+                self.$element.val(fileInput.data('urls'))
             });
-            self.$element.parent().append($div);
+            //self.$element.parent().append($div);
+
         };
 
         self.init();

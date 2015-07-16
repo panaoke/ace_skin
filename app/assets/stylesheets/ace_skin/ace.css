@@ -11063,6 +11063,7 @@ ul.attachment-list > li {
     width: 182px;
     line-height: 1 !important;
     padding-bottom: 4px !important;
+    text-align: inherit;
 }
 /* touch spinner buttons */
 .ace-spinner.touch-spinner .spinner-buttons {

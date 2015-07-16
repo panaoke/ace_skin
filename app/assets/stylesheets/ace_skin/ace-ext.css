@@ -18,12 +18,21 @@
     width: 100%;
     display: table;
     margin-top: 20px;
+    padding-left: 40px;
 }
 .ace-form .ace-input {
     width: 200px;
     height: 28px;
     padding-left: 4px;
     padding-right: 4px;
+    color: #333;
+}
+.ace-form textarea.ace-input {
+    height: 100px;
+    width: 300px;
+    text-indent: 1rem;
+    color: #333;
+    line-height: 20px;
 }
 .ace-form .input-group {
     width: 200px;
@@ -57,7 +66,7 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
 }
 .ace-form .text-danger {
     position: absolute;
-    right: 0;
+    right: 10px;
 }
 .modal-dialog .modal-body {
     max-height: 500px;
@@ -70,5 +79,41 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
 }
 .ace-form .form-group > div {
     line-height: 28px;
+}
+.ace-form .file-label .file-name {
+    overflow: visible;
+}
+.ace-form .file-label .file-name .remove {
+    display: block;
+}
+.ace-form .file-label .file-name .remove .icon-remove {
+    background: none;
+    color: red;
+    border: none;
+    text-indent: -7px;
+    line-height: 10px;
+}
+.ace-file-input .file-label.selected .file-name{
+    background: #EFEFEF;
+}
+.ace-file-input .file-label.selected .file-name:first-child{
+    border-top: 1px solid #DDD;
+}
+.ace-file-input .file-label.selected .file-name.active{
+    background: none;
+    cursor: initial;
+}
+.ace-file-input .file-label .file-name img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.ace-file-input .file-label.selected {
+    width: 300px;
+}
+.ace-file-multiple input[type=file] {
+    height: 50px;
+    width: 300px;
+    cursor: move;
 }
 

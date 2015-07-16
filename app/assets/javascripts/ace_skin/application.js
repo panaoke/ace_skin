@@ -18,9 +18,7 @@
 //= require ace_skin/jquery.ui.touch-punch.js
 //= require ace_skin/jquery.slimscroll.js
 //= require ace_skin/jquery.easy-pie-chart.js
-//= require ace_skin/flot/jquery.flot.js
-//= require ace_skin/flot/jquery.flot.pie.js
-//= require ace_skin/flot/jquery.flot.resize.js
+
 
 //= require ace_skin/jquery.hotkeys.js
 //= require ace_skin/jquery.maskedinput.js
@@ -39,8 +37,6 @@
 //= require ace_skin/date-time/daterangepicker.js
 //= require ace_skin/date-time/moment.js
 //= require ace_skin/date-time/locales/bootstrap-datepicker.zh-CN.js
-//= require ace_skin/shop.js
-
 
 //= require ace_skin/jquery.hotkeys.js
 //= require ace_skin/bootstrap-wysiwyg.js
@@ -54,5 +50,4 @@
 //= require ace_skin/ace-elements.js
 //= require ace_skin/ace.js
 //= require ace_skin/aceExt.js
-//= require ace_skin/user.js
 //= require ace_skin/bmap_convertor.js

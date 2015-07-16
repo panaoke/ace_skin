@@ -10,10 +10,14 @@ Gem::Specification.new do |s|
   s.authors     = ["panaoke"]
   s.email       = ["panaoke@gmail.com"]
   s.homepage    = "https://github.com/panaoke"
-  s.summary     = "a skin with bootstrap3"
-  s.description = "a skin with bootstrap3"
+  s.summary     = "a skin with bootstrap3 template ace"
+  s.description = "a skin with bootstrap3 template ace"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
+
+  s.add_dependency 'carrierwave'
+  s.add_dependency 'carrierwave-aliyun'
+	s.add_dependency 'mini_magick'
 
 end

@@ -380,6 +380,23 @@
 //        $('#underling_plans').trigger('shown.bs.tab')`
     })
 
+    $(document).on('click', '[data-toggle="colorbox"]', function (e) {
+        e.stopPropagation();
+        var $dom = $(e.target);
+        var option = {close: 'x', maxWidth: '95%', maxHeight: '95%'};
+        var url, title;
+        if(e.target.tagName == 'IMG') {
+            url = $dom.attr('src');
+            option.photo = true;
+        }else {
+            url = $dom.data('url');
+        }
+        title =  $dom.data('title');
+        option.href = url;
+        option.title = title;
+        $.colorbox(option);
+    });
+
     AceExt = {
         dialog: dialog,
         confirmDialog: confirmDialog

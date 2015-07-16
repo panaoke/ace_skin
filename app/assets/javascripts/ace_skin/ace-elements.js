@@ -11,6 +11,7 @@ jQuery(function() {
 
 	var Ace_File_Input = function(element , settings) {
 		var self = this;
+        self.value = $(element).data('value') || '';
 		this.settings = $.extend({}, $.fn.ace_file_input.defaults, settings);
 
 		this.$element = $(element);
@@ -26,6 +27,7 @@ jQuery(function() {
 		this.$element.wrap('<div class="ace-file-input" />');
 		
 		this.apply_settings();
+        this.reset_input();
 	}
 	Ace_File_Input.error = {
 		'FILE_LOAD_FAILED' : 1,
@@ -45,22 +47,22 @@ jQuery(function() {
 		 else this.$element.parent().removeClass('ace-file-multiple');
 
 		this.$element.parent().find(':not(input[type=file])').remove();//remove all except our input, good for when changing settings
-		this.$element.after('<label class="file-label" data-title="'+this.settings.btn_choose+'"><span class="file-name" data-title="'+this.settings.no_file+'">'+(this.settings.no_icon ? '<i class="'+this.settings.no_icon+'"></i>' : '')+'</span></label>'+(remove_btn ? '<a class="remove" href="#"><i class="'+this.settings.icon_remove+'"></i></a>' : ''));
+		this.$element.after('<label class="file-label" data-title="'+this.settings.btn_choose+'"></label>');
 		this.$label = this.$element.next();
 
-		this.$label.on('click', function(){//firefox mobile doesn't allow 'tap'!
-			if(!this.disabled && !self.element.disabled && !self.$element.attr('readonly')) 
-				self.$element.click();
-		})
+		//this.$label.on('click', function(){//firefox mobile doesn't allow 'tap'!
+		//	if(!this.disabled && !self.element.disabled && !self.$element.attr('readonly'))
+		//		self.$element.click();
+		//})
 
-		if(remove_btn) this.$label.next('a').on(ace.click_event, function(){
-			if(! self.can_reset ) return false;
-			
-			var ret = true;
-			if(self.settings.before_remove) ret = self.settings.before_remove.call(self.element);
-			if(!ret) return false;
-			return self.reset_input();
-		});
+		//this.$label.find('a').on(ace.click_event, function(){
+		//	if(! self.can_reset ) return false;
+		//
+		//	var ret = true;
+		//	if(self.settings.before_remove) ret = self.settings.before_remove.call(self.element);
+		//	if(!ret) return false;
+		//	return self.reset_input();
+		//});
 
 
 		if(this.settings.droppable && hasFileList) {
@@ -71,14 +73,11 @@ jQuery(function() {
 	Ace_File_Input.prototype.show_file_list = function($files) {
 		var files = typeof $files === "undefined" ? this.$element.data('ace_input_files') : $files;
 		if(!files || files.length == 0) return;
+        var $fileSpan = $('<span class="file-name"></span>');
 
 		//////////////////////////////////////////////////////////////////
 
-		if(this.well_style) {
-			this.$label.find('.file-name').remove();
-			if(!this.settings.btn_change) this.$label.addClass('hide-placeholder');
-		}
-		this.$label.attr('data-title', this.settings.btn_change).addClass('selected');
+		this.$label.addClass('selected');
 		
 		for (var i = 0; i < files.length; i++) {
 			var filename = typeof files[i] === "string" ? files[i] : $.trim( files[i].name );
@@ -93,22 +92,73 @@ jQuery(function() {
 			else if((/\.(mpe?g|flv|mov|avi|swf|mp4|mkv|webm|wmv|3gp)$/i).test(filename)) fileIcon = 'icon-film';
 			else if((/\.(mp3|ogg|wav|wma|amr|aac)$/i).test(filename)) fileIcon = 'icon-music';
 
+			$fileSpan.attr({'data-title':filename}).find('[class*="icon-"]').attr('class', fileIcon);
 
-			if(!this.well_style) this.$label.find('.file-name').attr({'data-title':filename}).find('[class*="icon-"]').attr('class', fileIcon);
-			else {
-				this.$label.append('<span class="file-name" data-title="'+filename+'"><i class="'+fileIcon+'"></i></span>');
-				var type = $.trim(files[i].type);
-				var can_preview = hasFileReader && this.settings.thumbnail 
-						&&
-						( (type.length > 0 && type.match('image')) || (type.length == 0 && fileIcon == 'icon-picture') )//the second one is for Android's default browser which gives an empty text for file.type
-				if(can_preview) {
-					var self = this;
-					$.when(preview_image.call(this, files[i])).fail(function(result){
-						//called on failure to load preview
-						if(self.settings.preview_error) self.settings.preview_error.call(self, filename, result.code);
-					});
-				}
-			}
+            var removeBtn = $('<a class="remove" href="#"><i class="icon-remove"></i></a>');
+            $fileSpan.append(removeBtn);
+            this.$label.append($fileSpan);
+            removeBtn.on('click', function(e) {
+                e.stopPropagation();
+                $fileSpan.remove();
+
+                values = $.map(self.$label.find('.file-name'), function(file, i) {
+                    return $(file).data('url');
+                }).join(';');
+                self.$element.data('urls', values);
+                self.$element.trigger('changeUrl');
+
+                if(self.$label.find('.file-name').length == 0) {
+                    self.reset_input();
+                }
+            });
+
+            var type = $.trim(files[i].type);
+            var can_preview = hasFileReader && this.settings.thumbnail
+                    &&
+                    ( (type.length > 0 && type.match('image')) || (type.length == 0 && fileIcon == 'icon-picture') )//the second one is for Android's default browser which gives an empty text for file.type
+            if(can_preview) {
+                var self = this;
+                $.when(preview_image.call(this, $fileSpan, files[i])).fail(function(result){
+                    //called on failure to load preview
+                    if(self.settings.preview_error) self.settings.preview_error.call(self, filename, result.code);
+                });
+            }
+
+            var formData = new FormData();
+            formData.append("authenticity_token", $('input[name="authenticity_token"]').val());
+            formData.append("utf8", '✓');
+            formData.append("ace_file", files[0]);
+
+            $.ajax({
+                url: '/ace_skin/files',  //server script to process data
+                type: 'POST',
+                xhr: function() {
+                    var xhr = $.ajaxSettings.xhr();
+                    //Download progress
+                    xhr.addEventListener("progress", function (evt) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log(Math.round(percentComplete * 100) + "%");
+                    }, false);
+                    return xhr;
+                },
+                //Ajax事件
+
+                success: function(result) {
+                    $fileSpan.data('url', result.url);
+                    $fileSpan.addClass('active');
+                    values = $.map(self.$label.find('.file-name'), function(file, i) {
+                        return $(file).data('url');
+                    }).join(';');
+                    self.$element.data('urls', values);
+                    self.$element.trigger('changeUrl');
+                },
+                // Form数据
+                data: formData,
+                //Options to tell JQuery not to process data or worry about content-type
+                cache: false,
+                contentType: false,
+                processData: false
+            });
 
 		}
 
@@ -116,13 +166,50 @@ jQuery(function() {
 	}
 
 	Ace_File_Input.prototype.reset_input = function() {
+        var self = this;
 	  this.$label.attr({'data-title':this.settings.btn_choose, 'class':'file-label'})
 			.find('.file-name:first').attr({'data-title':this.settings.no_file , 'class':'file-name'})
 			.find('[class*="icon-"]').attr('class', this.settings.no_icon)
 			.prev('img').remove();
 			if(!this.settings.no_icon) this.$label.find('[class*="icon-"]').remove();
-		
-		this.$label.find('.file-name').not(':first').remove();
+      var urls =  this.$element.data('urls')
+      if($.trim(urls) != '') {
+          $.each(this.$element.data('urls').split(';'), function(i, url) {
+              var strs = url.split('/');
+              var filename = strs[strs.length - 1];
+              var $fileSpan = $('<span class="file-name active"></span>');
+              $fileSpan.data('url', url);
+              var fileIcon = 'icon-file';
+              if((/\.(jpe?g|png|gif|svg|bmp|tiff?)$/i).test(filename)) {
+                  fileIcon = 'icon-picture';
+              }
+              else if((/\.(mpe?g|flv|mov|avi|swf|mp4|mkv|webm|wmv|3gp)$/i).test(filename)) fileIcon = 'icon-film';
+              else if((/\.(mp3|ogg|wav|wma|amr|aac)$/i).test(filename)) fileIcon = 'icon-music';
+
+              $fileSpan.attr({'data-title': filename}).find('[class*="icon-"]').attr('class', fileIcon);
+              if(fileIcon == 'icon-picture') { $.when(preview_image.call(self, $fileSpan)) }
+
+              var removeBtn = $('<a class="remove" href="#"><i class="icon-remove"></i></a>');
+
+              $fileSpan.append(removeBtn);
+              removeBtn.on('click', function(e) {
+                  e.stopPropagation();
+                  $fileSpan.remove();
+                  values = $.map(self.$label.find('.file-name'), function(file, i) {
+                      return $(file).data('url');
+                  }).join(';');
+                  self.$element.data('urls', values);
+                  self.$element.trigger('changeUrl');
+
+                  if(self.$label.find('.file-name').length == 0) {
+                      self.reset_input();
+                  }
+              });
+
+              self.$label.addClass('selected').append($fileSpan);
+          })
+      }
+
 		
 		if(this.$element.data('ace_input_files')) {
 			this.$element.removeData('ace_input_files');
@@ -247,54 +334,70 @@ jQuery(function() {
 
 
 
-	var preview_image = function(file) {
+	var preview_image = function($span, file) {
 		var self = this;
-		var $span = self.$label.find('.file-name:last');//it should be out of onload, otherwise all onloads may target the same span because of delays
-		
-		var deferred = new $.Deferred
-		var reader = new FileReader();
-		reader.onload = function (e) {
-			$span.prepend("<img class='middle' style='display:none;' />");
-			var img = $span.find('img:last').get(0);
+        $img = $("<img class='middle'  data-toggle='colorbox' style='display:none;' />");
+        $img.data('title', $span.title);
+        $span.append($img);
+        if(file != undefined) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                $img.attr('src', this.result);
+                $img.show();
+            }
+        }else {
+            $img.attr('src', $span.data('url'));
+            $img.show();
+        }
 
-			$(img).one('load', function() {
-				//if image loaded successfully
-				var size = 50;
-				if(self.settings.thumbnail == 'large') size = 150;
-				else if(self.settings.thumbnail == 'fit') size = $span.width();
-				$span.addClass(size > 50 ? 'large' : '');
-
-				var thumb = get_thumbnail(img, size, file.type);
-				if(thumb == null) {
-					//if making thumbnail fails
-					$(this).remove();
-					deferred.reject({code:Ace_File_Input.error['THUMBNAIL_FAILED']});
-					return;
-				}
-
-				var w = thumb.w, h = thumb.h;
-				if(self.settings.thumbnail == 'small') {w=h=size;};
-				$(img).css({'background-image':'url('+thumb.src+')' , width:w, height:h})									
-						.data('thumb', thumb.src)
-						.attr({src:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='})
-						.show()
-
-				///////////////////
-				deferred.resolve();
-			}).one('error', function() {
-				//for example when a file has image extenstion, but format is something else
-				$span.find('img').remove();
-				deferred.reject({code:Ace_File_Input.error['IMAGE_LOAD_FAILED']});
-			});
-
-			img.src = e.target.result;
-		}
-		reader.onerror = function (e) {
-			deferred.reject({code:Ace_File_Input.error['FILE_LOAD_FAILED']});
-		}
-		reader.readAsDataURL(file);
-
-		return deferred.promise();
+        //
+        //
+        //
+        //
+        //
+        //
+		//reader.onload = function (e) {
+        //
+        //
+		//	$(img).one('load', function() {
+		//		//if image loaded successfully
+		//		var size = 50;
+		//		if(self.settings.thumbnail == 'large') size = 150;
+		//		else if(self.settings.thumbnail == 'fit') size = $span.width();
+		//		$span.addClass(size > 50 ? 'large' : '');
+        //
+		//		var thumb = get_thumbnail(img, size);
+		//		if(thumb == null) {
+		//			//if making thumbnail fails
+		//			$(this).remove();
+		//			deferred.reject({code:Ace_File_Input.error['THUMBNAIL_FAILED']});
+		//			return;
+		//		}
+        //
+		//		var w = thumb.w, h = thumb.h;
+		//		if(self.settings.thumbnail == 'small') {w=h=size;};
+		//		$(img).css({width:w, height:h})
+		//				.data('thumb', thumb.src)
+		//				.attr({src:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=='})
+		//				.show();
+        //
+		//		///////////////////
+		//		deferred.resolve();
+		//	}).one('error', function() {
+		//		//for example when a file has image extenstion, but format is something else
+		//		$span.find('img').remove();
+		//		deferred.reject({code:Ace_File_Input.error['IMAGE_LOAD_FAILED']});
+		//	});
+        //
+		//	img.src = e.target.result;
+		//}
+		//reader.onerror = function (e) {
+		//	deferred.reject({code:Ace_File_Input.error['FILE_LOAD_FAILED']});
+		//}
+		//reader.readAsDataURL(file);
+        //
+		//return deferred.promise();
 	}
 
 	var get_thumbnail = function(img, size, type) {
