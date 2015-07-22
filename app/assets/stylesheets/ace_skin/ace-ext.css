@@ -116,4 +116,11 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
     width: 300px;
     cursor: move;
 }
+.ace-form .form-group [class*="col-sm-"] {
+    padding-left: 0;
+    padding-right: 0;
+}
+.ace-form .form-group .form-desc {
+    text-indent: 30px;
+}
 
