@@ -40,7 +40,10 @@
 
 //= require ace_skin/jquery.hotkeys.js
 //= require ace_skin/bootstrap-wysiwyg.js
+//= require ace_skin/csv.js
 //= require ace_skin/jqGrid/jquery.jqGrid.src.js
+//= require ace_skin/jqGrid/search.js
+//= require ace_skin/jqGrid/csv_export.js
 //= require ace_skin/jqGrid/i18n/grid.locale-cn.js
 //= require ace_skin/jqGrid/i18n/grid.locale-en.js
 //= require ace_skin/jqGrid/jqGridExt.js

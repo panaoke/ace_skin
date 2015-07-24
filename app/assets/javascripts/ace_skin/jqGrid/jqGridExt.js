@@ -55,8 +55,21 @@
 //        }
         $(grid).on('ajaxSubmitComplete', function() {
             $(grid).trigger('reloadGrid');
-        })
+        });
 
+        if(options.filter != undefined) {
+            try {
+                window.search = new SearchPlugin($(grid), options.filter);
+            }catch(e) {
+                console.log('搜索插件加载失败, 请仔细检查配置');
+            }
+        }
+
+        try {
+            window.csv = new CsvPlugin($(grid));
+        }catch(e) {
+            console.log('csv导出插件加载失败, 请仔细检查配置');
+        }
 
     }
 
@@ -66,7 +79,8 @@
                 edit: false,
                 add: false,
                 del: false,
-                search: (options.searchBtn || false),
+                //search: (options.searchBtn || false),
+                search: true,
                 searchicon: 'icon-search orange',
                 searchtext: location.query,
                 refresh: false,

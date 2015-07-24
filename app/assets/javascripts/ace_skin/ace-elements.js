@@ -522,11 +522,11 @@ jQuery(function() {
 
 					if("ontouchend" in document || options.touch_spinner) {
 						$parent_div.addClass('touch-spinner')
-						$parent_div.css('width' , (max * 20 + 40)+'px')
+						//$parent_div.css('width' , (max * 20 + 40)+'px')
 					}
 					else {
 						$(this).next().addClass('btn-group-vertical');
-						$parent_div.css('width' , (max * 20 + 10)+'px')
+						//$parent_div.css('width' , (max * 20 + 10)+'px')
 					}
 				}
 				

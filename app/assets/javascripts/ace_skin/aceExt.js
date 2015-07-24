@@ -27,8 +27,7 @@
 
     function choosen(element, options) {
         var defaultOptions = {
-            no_results_text: i18n.view('choosen', 'no_results_text'),
-            width: '200px'
+            no_results_text: i18n.view('choosen', 'no_results_text')
         };
         $(element).chosen($.extend({}, defaultOptions,  options));
     }
@@ -45,7 +44,7 @@
             step: 1,
             value: $(element).val()
         };
-        $(element).ace_spinner($.extend({}, defaultOptions, options));
+        return $(element).ace_spinner($.extend({}, defaultOptions, options));
     }
 
     function dialog(options, target) {
@@ -246,7 +245,9 @@
         $(container).find('input[data-toggle=integer]').each(function() {
             var $this = $(this);
             var options = $this.data() || {};
-            aceSpinner($this, options)
+            if($this.data('plugin') == undefined) {
+                $this.data('plugin', aceSpinner($this, options));
+            }
         });
 
         $(container).find('input[data-toggle=float]').each(function() {
