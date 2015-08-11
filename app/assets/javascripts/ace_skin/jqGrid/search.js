@@ -41,7 +41,9 @@ SearchPlugin = function(table, options) {
 
     var defaultSupportSymbol = {
         integer: ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$exists', '$nexists'],
+        float: ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$exists', '$nexists'],
         text: ['$eq', '$like', '$ne', '$exists', '$nexists'],
+        string: ['$eq', '$like', '$ne', '$exists', '$nexists'],
         date: ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$exists', '$nexists'],
         time: ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$exists', '$nexists'],
         datetime: ['$eq', '$gt', '$gte', '$lt', '$lte', '$ne', '$exists', '$nexists'],
@@ -111,12 +113,20 @@ SearchPlugin = function(table, options) {
 
     self.filters = self.options.filters || [self.defaultFilter];
 
-
+    self.formatFilterKey = function(symbol, code) {
+        if(code.indexOf('.') >= 0) {
+            relationClass = code.split('.')[0];
+            field = code.split('.')[1];
+            return relationClass + '.' + symbol + '_' + field;
+        }else {
+            return symbol + '_' + code;
+        }
+    };
 
     self.refreshRequestParams = function() {
         var conditions = $.map(self.fetchFilters(), function(filter, i) {
             condition = {};
-            condition[filter.symbol + '_' + filter.code] = filter.value
+            condition[self.formatFilterKey(filter.symbol,filter.code)] = filter.value;
             return condition;
         });
         self.$table.jqGrid("setGridParam", {postData: {conditions: JSON.stringify(conditions)}}).trigger("reloadGrid", [{page:1}]);
