@@ -30,6 +30,7 @@
 //= require ace_skin/calculate.js
 //= require ace_skin/jquery.colorbox.js
 
+
 //= require ace_skin/bootbox.js
 //= require ace_skin/fullcalendar.js
 //= require ace_skin/date-time/bootstrap-datepicker.js
@@ -49,6 +50,8 @@
 //= require ace_skin/jqGrid/jqGridExt.js
 //= require ace_skin/file.js
 //= require ace_skin/position.js
+
+//= require turbolinks
 
 //= require ace_skin/ace-elements.js
 //= require ace_skin/ace.js
