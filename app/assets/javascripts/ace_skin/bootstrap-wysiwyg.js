@@ -90,9 +90,9 @@
 				editor.focus();
 				$.each(files, function (idx, fileInfo) {
 					if (/^image\//.test(fileInfo.type)) {
-						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
-							execCommand('insertimage', dataUrl);
-						}).fail(function (e) {
+						$.when(FileUpload.upload(files, function(result) {
+                            execCommand('insertimage', result.url);
+                        })).fail(function (e) {
 							options.fileUploadError("file-reader", e);
 						});
 					} else {

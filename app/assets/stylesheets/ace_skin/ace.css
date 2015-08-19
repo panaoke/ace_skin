@@ -11745,6 +11745,7 @@ ul.attachment-list > li {
     /* for adding image resize functionality in chrome and safari */
     .wysiwyg-editor img {
         display: inline !important;
+        max-width: 100%;
     }
     .wysiwyg-editor .ui-wrapper {
         border: 1px dotted #D00;

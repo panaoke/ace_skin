@@ -79,3 +79,44 @@
     };
 
 }(window.jQuery);
+
+FileUpload = function() {
+    var self = this;
+
+    self.url = '/ace_skin/files';
+    self.type = 'POST';
+
+    self.upload = function(file, successCall, progressCall) {
+        var formData = new FormData();
+        formData.append("authenticity_token", $('input[name="authenticity_token"]').val());
+        formData.append("utf8", '✓');
+        formData.append("ace_file", file[0]);
+
+        $.ajax({
+            url: self.url,  //server script to process data
+            type: self.type,
+            xhr: function() {
+                var xhr = $.ajaxSettings.xhr();
+                //Download progress
+                xhr.addEventListener("progress", function (evt) {
+                    var percentComplete = evt.loaded / evt.total;
+                    console.log(Math.round(percentComplete * 100) + "%");
+                }, false);
+                return xhr;
+            },
+            //Ajax事件
+
+            success: function(result) {
+                successCall(result);
+            },
+            // Form数据
+            data: formData,
+            //Options to tell JQuery not to process data or worry about content-type
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+
+    return self;
+}();

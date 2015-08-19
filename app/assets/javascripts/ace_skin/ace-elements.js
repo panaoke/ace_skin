@@ -124,42 +124,15 @@ jQuery(function() {
                 });
             }
 
-            var formData = new FormData();
-            formData.append("authenticity_token", $('input[name="authenticity_token"]').val());
-            formData.append("utf8", '✓');
-            formData.append("ace_file", files[0]);
-
-            $.ajax({
-                url: '/ace_skin/files',  //server script to process data
-                type: 'POST',
-                xhr: function() {
-                    var xhr = $.ajaxSettings.xhr();
-                    //Download progress
-                    xhr.addEventListener("progress", function (evt) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(Math.round(percentComplete * 100) + "%");
-                    }, false);
-                    return xhr;
-                },
-                //Ajax事件
-
-                success: function(result) {
-                    $fileSpan.data('url', result.url);
-                    $fileSpan.addClass('active');
-                    values = $.map(self.$label.find('.file-name'), function(file, i) {
-                        return $(file).data('url');
-                    }).join(';');
-                    self.$element.data('urls', values);
-                    self.$element.trigger('changeUrl');
-                },
-                // Form数据
-                data: formData,
-                //Options to tell JQuery not to process data or worry about content-type
-                cache: false,
-                contentType: false,
-                processData: false
+            FileUpload.upload(files, function(result) {
+                $fileSpan.data('url', result.url);
+                $fileSpan.addClass('active');
+                values = $.map(self.$label.find('.file-name'), function(file, i) {
+                    return $(file).data('url');
+                }).join(';');
+                self.$element.data('urls', values);
+                self.$element.trigger('changeUrl');
             });
-
 		}
 
 		return true;
