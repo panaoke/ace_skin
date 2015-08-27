@@ -1,3 +1,5 @@
 zh-cn:
   actions:
     nil: 无
+    'yes': 是
+    'no': 否

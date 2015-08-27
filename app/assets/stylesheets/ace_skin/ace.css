@@ -14350,3 +14350,8 @@ th[aria-selected=true] .ui-jqgrid-sortable {
         top: 65px;
     }
 }
+.form-input .radio {
+    display: inline-block;
+    margin: 0;
+    margin-top: 10px;
+}
