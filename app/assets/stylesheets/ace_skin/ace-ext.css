@@ -169,3 +169,6 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
 .ui-jqgrid .search-panel {
     margin-top: 10px;
 }
+.form-group .chosen-container-multi {
+    width: 200px;
+}

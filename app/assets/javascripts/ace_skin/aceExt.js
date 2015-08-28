@@ -343,6 +343,7 @@
         aceColorBox($(this), $(this).options);
     };
 
+
     $.fn.ajaxSubmit = function (successCallBack, errorCallBack) {
         ajaxSubmit($(this), successCallBack, errorCallBack);
     };
