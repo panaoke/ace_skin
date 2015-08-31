@@ -21,7 +21,7 @@
         <li>
           <a href="javascript:void(0);" id='user_password'>
             <i class="icon-user"></i>
-            <%#= view_action("change_password")%>
+            <%= view_action("change_password")%>
           </a>
         </li>
 
@@ -30,15 +30,10 @@
         <li>
           <a href="/logout">
             <i class="icon-off"></i>
-            <%#= view_action("logout")%>
+            <%= view_action("logout")%>
           </a>
         </li>
       </ul>
     </li>
   </ul><!-- /.ace-nav -->
 </div><!-- /.navbar-header -->
-<script>
-  $('#user_password').on("click",function() {
-      userpassword.changePasswordlEvent()
-  })
-</script>
