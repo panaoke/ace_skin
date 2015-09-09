@@ -26,16 +26,18 @@
     padding-left: 4px;
     padding-right: 4px;
     color: #333;
+    max-width: 250px;
 }
-.ace-form textarea.ace-input {
+.ace-form textarea.ace-input[data-toggle="text"] {
     height: 100px;
-    width: 300px;
+    width: 400px;
     text-indent: 1rem;
     color: #333;
     line-height: 20px;
+    max-width: 400px;
 }
 .ace-form .input-group {
-    width: 200px;
+    width: 250px;
 }
 input[type=checkbox].ace + .lbl::before, input[type=radio].ace + .lbl::before {
     color: #46AD09;
@@ -52,9 +54,25 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
 }
 .ace-form .wysiwyg-editor {
     overflow-y: inherit;
-    max-height: 250px;
+    max-height: none;
     width: initial;
+    max-width: inherit;
     height: 250px;
+}
+.form-input .radio {
+    padding-left: 0;
+    padding-right: 20px;
+    width: 70px;
+    margin-top: 0;
+}
+input[type=radio].ace + .lbl::before {
+    margin-right: 10px;
+}
+input[type=checkbox].ace + .lbl, input[type=radio].ace + .lbl {
+    width: 50px;
+}
+input[type=radio].ace:checked + .lbl::before {
+    font-size: 16px;
 }
 .ace-form .wysiwyg-editor:after {
     display: block;
@@ -70,10 +88,30 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
     right: 10px;
 }
 .modal-dialog .modal-body {
-    max-height: 500px;
+    max-height: 650px;
     overflow-y: scroll;
     overflow-x: hidden;
     padding-bottom: 0;
+}
+.ace-spinner input[type=text].spinner-input.form-control {
+    width: 100%;
+}
+
+.ace-form .form-name {
+    text-align: right;
+}
+.ace-form .form-name .name-label {
+    padding-right: 30px;
+}
+.bootbox .modal-dialog {
+    right: auto;
+    left: 50%;
+    min-width: 600px;
+    max-height: 800px;
+    padding-top: 30px;
+    max-width: 1100px;
+    padding-bottom: 30px;
+    width: initial;
 }
 .ace-form .wysiwyg-style2 {
     padding-left: 4px;
@@ -135,14 +173,19 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
 }
 .ui-jqgrid .search-filter select {
     width: 100%;
+    max-width: 250px;
 }
 .chosen-container.chosen-container-single {
     width: 100%;
+    max-width: 250px;
 }
 .ui-jqgrid .search-filter .filter[class*="col-md-"] {
     padding-right: 10px;
     height: 30px;
     margin-bottom: 20px;
+}
+.bootbox .modal-footer {
+    text-align: center;
 }
 .ui-jqgrid .search-filter .ace-spinner .spinner-input {
     height: 30px;
@@ -170,5 +213,5 @@ input[type=checkbox].ace:disabled + .lbl::before, input[type=radio].ace:disabled
     margin-top: 10px;
 }
 .form-group .chosen-container-multi {
-    width: 200px;
+    width: 250px;
 }

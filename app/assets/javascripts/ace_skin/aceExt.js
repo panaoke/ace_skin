@@ -107,14 +107,17 @@
     }
 
     function confirmDialog(ele) {
-        var href = ele.attr('href'),
-            method = ele.data('method') || ele.data('aceMethod'),
-            target = ele.attr('target'),
-            csrf_token = $('meta[name=csrf-token]').attr('content'),
-            csrf_param = $('meta[name=csrf-param]').attr('content'),
-            form = $('<form method="post" action="' + href + '"></form>'),
-            metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
+        var href = ele.attr('href');
+        var method = ele.data('method') || ele.data('aceMethod');
+        var target = ele.attr('target');
+        var  csrf_token = $('meta[name=csrf-token]').attr('content');
+        var csrf_param = $('meta[name=csrf-param]').attr('content');
+        var form = $('<form method="post" ></form>');
 
+        var metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
+
+        form.attr('action', href);
+        form.attr('method', method);
         if (ele.data('aceRemote')) {
             form.data('remote', ele.data('aceRemote'))
         }
@@ -129,7 +132,11 @@
 
         bootbox.confirm($(ele).data("ace-confirm"), function(result){
             if(result) {
-                $(ele).trigger('confirm');
+                ajaxSubmit(form, function(){
+
+                }, function() {
+
+                })
             }else{
                 $(ele).trigger('cancel');
             }

@@ -1,6 +1,6 @@
 <div class="col-sm-12 form-data-group">
   <div class="col-sm-2 form-data-name">
-    <%= input.label.try(:html_safe) %>
+    <span class="name-label"><%= input.label.try(:html_safe) %></span>
     <% if input.required %>
       <span class="text-danger">*</span>
     <% end %>
