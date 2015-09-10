@@ -133,9 +133,9 @@
         bootbox.confirm($(ele).data("ace-confirm"), function(result){
             if(result) {
                 ajaxSubmit(form, function(){
-
+                    $(ele).trigger('ajaxSubmitSuccess');
                 }, function() {
-
+                    $(ele).trigger('ajaxSubmitFailed');
                 })
             }else{
                 $(ele).trigger('cancel');
