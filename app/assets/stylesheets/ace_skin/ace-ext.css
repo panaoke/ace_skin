@@ -215,3 +215,6 @@ input[type=radio].ace:checked + .lbl::before {
 .form-group .chosen-container-multi {
     width: 250px;
 }
+.ui-jqgrid .ui-jqgrid-htable th div {
+    height: initial;
+}
