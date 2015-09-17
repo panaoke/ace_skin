@@ -107,32 +107,9 @@
     }
 
     function confirmDialog(ele) {
-        var href = ele.attr('href');
-        var method = ele.data('method') || ele.data('aceMethod');
-        var target = ele.attr('target');
-        var  csrf_token = $('meta[name=csrf-token]').attr('content');
-        var csrf_param = $('meta[name=csrf-param]').attr('content');
-        var form = $('<form method="post" ></form>');
-
-        var metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
-
-        form.attr('action', href);
-        form.attr('method', method);
-        if (ele.data('aceRemote')) {
-            form.data('remote', ele.data('aceRemote'))
-        }
-
-        if (csrf_param !== undefined && csrf_token !== undefined) {
-            metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
-        }
-
-        if (target) { form.attr('target', target); }
-
-        form.hide().append(metadata_input).appendTo('body');
-
         bootbox.confirm($(ele).data("ace-confirm"), function(result){
             if(result) {
-                ajaxSubmit(form, function(){
+                ajaxSubmit($(ele), function(){
                     $(ele).trigger('ajaxSubmitSuccess');
                 }, function() {
                     $(ele).trigger('ajaxSubmitFailed');
@@ -158,7 +135,7 @@
             url =  $ele.data('url');
             data = $ele.data('data') || {};
         }
-        data.authenticity_token = $('[name="authenticity_token"]').val();
+        data.authenticity_token = $("[name='csrf-token']").attr('content');
         $.ajax({
             type: type,
             url: url,
