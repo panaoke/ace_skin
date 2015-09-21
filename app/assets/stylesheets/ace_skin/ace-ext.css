@@ -218,3 +218,8 @@ input[type=radio].ace:checked + .lbl::before {
 .ui-jqgrid .ui-jqgrid-htable th div {
     height: initial;
 }
+.ui-jqgrid .ui-jqgrid-bdiv {
+    min-height: 350px;
+    height: initial !important;
+    overflow-y: visible;
+}
