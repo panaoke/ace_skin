@@ -18,8 +18,12 @@
             loadtext: i18n.view('jg_grid', 'loadtext'),
             pagerBtns: [],
             export_btn: false,
-            loadComplete: function () {
+            loadComplete: function (data) {
                 var table = this;
+                if($.trim(data.caption) != '') {
+                    $(table).jqGrid("setCaption", data.caption);
+                }
+                console.log(data);
                 setTimeout(function () {
                     updatePagerIcons(table);
                 }, 0);
