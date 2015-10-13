@@ -102,6 +102,13 @@ zh-cn:
         insertImage: '插入网络图片'
         selectImage: '插入本地图片'
         imageUrlPlaceholder: '请输入图片地址'
+        createLinkPlaceholder: '请输入链接地址'
+        insertLink: 确定
+        createLink: 添加链接
+        unlink: 解除链接
+        class: '编辑dom类'
+        createClassPlaceholder: '请输入元素的class'
+        insertClass: 确定
       shop_select:
         title: '门店选择'
 

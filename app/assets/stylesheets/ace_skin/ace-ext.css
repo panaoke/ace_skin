@@ -223,3 +223,8 @@ input[type=radio].ace:checked + .lbl::before {
     height: initial !important;
     overflow-y: visible;
 }
+.form-input .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+}

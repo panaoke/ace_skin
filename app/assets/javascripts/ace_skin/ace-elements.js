@@ -744,12 +744,20 @@ jQuery(function() {
 				title : 'Hyperlink',
 				button_text : 'Add',
 				placeholder : 'URL',
-				button_class : 'btn-primary'
+				button_class : 'btn-primary',
+                className : 'link'
 			},
 			'unlink' : {
 				icon : 'icon-unlink',
-				title : 'Remove Hyperlink'
+				title : 'Remove Hyperlink',
+                className : 'unlink'
 			},
+            'class' : {
+                icon : ' icon-skype',
+                title : 'edit DOM Class',
+                className : 'edit-class',
+                button_class: 'edit-class-btn'
+            },
 			'insertImage' : {
 				icon : 'icon-picture',
 				title : 'Insert picture',
@@ -806,6 +814,7 @@ jQuery(function() {
 			null,
 			'createLink',
 			'unlink',
+            'class',
 			null,
 			'insertImage',
 			null,
@@ -867,6 +876,18 @@ jQuery(function() {
 							</div>\
 						</div> </div>';
 					break;
+
+                    case 'class':
+                        toolbar += ' <div class="inline position-relative"> <a class="btn btn-sm '+className+' dropdown-toggle" data-toggle="dropdown" title="'+button.title+'"><i class="'+button.icon+'"></i></a> ';
+                        toolbar += ' <div class="dropdown-menu dropdown-caret pull-right">\
+							<div class="input-group">\
+								<input class="form-control" placeholder="'+button.placeholder+'" type="text" data-edit="'+button.name+'" />\
+								<span class="input-group-btn">\
+									<button class="btn btn-sm '+button.button_class+'" type="button">'+button.button_text+'</button>\
+								</span>\
+							</div>\
+						</div> </div>';
+                        break;
 
 					case 'insertImage':
 						toolbar += ' <div class="inline position-relative"> <a class="btn btn-sm '+className+' dropdown-toggle" data-toggle="dropdown" title="'+button.title+'"><i class="'+button.icon+'"></i></a> ';
@@ -961,6 +982,8 @@ jQuery(function() {
                 }
 			});
 
+            var $focusDom;
+
             textarea.on('change', function() {
                 self.html(textarea.html());
             });
@@ -969,6 +992,34 @@ jQuery(function() {
                 textarea.html(self.html());
             });
 
+            //双击链接会自动弹出编辑按钮
+            $(self).on('dblclick', 'a', function() {
+                toolbar.find('.link')[0].click();
+                toolbar.find('[data-edit="createLink"]').val($(this).attr('href'));
+            });
+
+            toolbar.find('.link').on('click', function() {
+                var $dom = $(window.getSelection().focusNode).parents('a');
+                if($dom.length > 0 && $dom[0].tagName == 'A') {
+                    toolbar.find('[data-edit="createLink"]').val($dom.attr('href'));
+                }
+            });
+
+            toolbar.find('.edit-class').next().find('input').on('change', function() {
+                if($.trim($focusDom) != '') {
+                    $focusDom.attr('class', $(this).val());
+                }
+            });
+
+            toolbar.find('.edit-class').on('click', function() {
+                var $dom = $(window.getSelection().focusNode).parent();
+                if($dom.parents(self).length > 0) {
+                    $focusDom = $dom;
+                    toolbar.find('.edit-class').next().find('input').val($focusDom.attr('class'));
+                }else {
+                    $focusDom = undefined;
+                }
+            });
 
 			var $options = $.extend({}, { activeToolbarClass: 'active' , toolbarSelector : toolbar }, options.wysiwyg || {});
 			$(this).wysiwyg( $options );
