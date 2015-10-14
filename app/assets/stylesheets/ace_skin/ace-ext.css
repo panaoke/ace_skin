@@ -228,3 +228,9 @@ input[type=radio].ace:checked + .lbl::before {
     display: inline-block;
     margin-right: 5px;
 }
+.dropdown-colorpicker > .dropdown-menu > li > .colorpick-btn {
+    border: 1px solid #D1D1D1;
+}
+.back-color .btn-colorpicker{
+    background: #FA573C;
+}

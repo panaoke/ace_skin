@@ -582,14 +582,14 @@ jQuery(function() {
 			}).end().on('change.ace_inner_call', function(){
 					$(this).next().find('.btn-colorpicker').css('background-color', this.value);
 			})
-			.after('<div class="dropdown dropdown-colorpicker"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="btn-colorpicker" style="background-color:'+color+'"></span></a><ul class="dropdown-menu'+(settings.caret? ' dropdown-caret' : '')+(settings.pull_right ? ' pull-right' : '')+'">'+colors+'</ul></div>')
+			.after('<div class="dropdown dropdown-colorpicker '+$that.data("class")+'"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><span class="btn-colorpicker" style="background-color:'+color+'"></span></a><ul class="dropdown-menu'+(settings.caret? ' dropdown-caret' : '')+(settings.pull_right ? ' pull-right' : '')+'">'+colors+'</ul></div>')
 			.next().find('.dropdown-menu').on(ace.click_event, function(e) {
 				var a = $(e.target);
 				if(!a.is('.colorpick-btn')) return false;
 				a.closest('ul').find('.selected').removeClass('selected');
 				a.addClass('selected');
-				var color = a.data('color');
 
+				var color = a.data('color');
 				$that.val(color).change();
 
 				e.preventDefault();
@@ -774,7 +774,8 @@ jQuery(function() {
 			},
 			'backColor' : {
 				values : color_values,
-				title : 'Change Background Color'
+				title : 'Change Background Color',
+                icon : 'icon-picture'
 			},
 			'undo' : {
 				icon : 'icon-undo',
@@ -908,8 +909,14 @@ jQuery(function() {
 					break;
 
 					case 'foreColor':
+                        toolbar += ' <select class="hide wysiwyg_colorpicker" title="'+button.title+'"> ';
+                        for(var color in button.values)
+                            toolbar += ' <option value="'+button.values[color]+'">'+button.values[color]+'</option> ';
+                        toolbar += ' </select> ';
+                        toolbar += ' <input style="display:none;" disabled class="hide" type="text" data-edit="'+button.name+'" /> ';
+                        break;
 					case 'backColor':
-						toolbar += ' <select class="hide wysiwyg_colorpicker" title="'+button.title+'"> ';
+						toolbar += ' <select class="hide wysiwyg_colorpicker " title="'+button.title+'" data-class="back-color"> ';
 						for(var color in button.values)
 							toolbar += ' <option value="'+button.values[color]+'">'+button.values[color]+'</option> ';
 						toolbar += ' </select> ';
