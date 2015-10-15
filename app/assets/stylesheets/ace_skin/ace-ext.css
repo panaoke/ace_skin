@@ -79,6 +79,7 @@ input[type=radio].ace:checked + .lbl::before {
     content: " ";
     border-top: 1px solid rgb(62, 62, 62);
     margin-top: 30px;
+    clear: both;
 }
 .searchFilter {
     display: none !important;
@@ -233,4 +234,8 @@ input[type=radio].ace:checked + .lbl::before {
 }
 .back-color .btn-colorpicker{
     background: #FA573C;
+}
+.ace-form .wysiwyg-editor div[class*="col-xs"] {
+    padding-left: 0px;
+    padding-right: 0px;
 }

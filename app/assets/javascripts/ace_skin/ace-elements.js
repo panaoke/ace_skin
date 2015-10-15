@@ -989,15 +989,16 @@ jQuery(function() {
                 }
 			});
 
-            var $focusDom;
-
             textarea.on('change', function() {
                 self.html(textarea.html());
             });
 
             self.on('input', function() {
+                self.find('[style]').removeAttr('style');
                 textarea.html(self.html());
             });
+
+            var $focusDom;
 
             //双击链接会自动弹出编辑按钮
             $(self).on('dblclick', 'a', function() {
@@ -1019,13 +1020,8 @@ jQuery(function() {
             });
 
             toolbar.find('.edit-class').on('click', function() {
-                var $dom = $(window.getSelection().focusNode).parent();
-                if($dom.parents(self).length > 0) {
-                    $focusDom = $dom;
-                    toolbar.find('.edit-class').next().find('input').val($focusDom.attr('class'));
-                }else {
-                    $focusDom = undefined;
-                }
+                $focusDom = $(window.getSelection().getRangeAt(0).commonAncestorContainer);
+                toolbar.find('.edit-class').next().find('input').val($focusDom.attr('class'));
             });
 
 			var $options = $.extend({}, { activeToolbarClass: 'active' , toolbarSelector : toolbar }, options.wysiwyg || {});
