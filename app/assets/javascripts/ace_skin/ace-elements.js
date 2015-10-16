@@ -125,7 +125,7 @@ jQuery(function() {
             }
 
             FileUpload.upload(files, function(result) {
-                $fileSpan.data('url', result.url);
+                $fileSpan.data('url', result.urls[0]);
                 $fileSpan.addClass('active');
                 values = $.map(self.$label.find('.file-name'), function(file, i) {
                     return $(file).data('url');
@@ -903,7 +903,7 @@ jQuery(function() {
 							 '<div class="space-2"></div>\
 							 <div class="center">\
 								<button class="btn btn-sm '+button.button_class+' wysiwyg-choose-file" type="button">'+button.button_text+'</button>\
-								<input type="file" data-edit="'+button.name+'" />\
+								<input type="file" multiple CZ data-edit="'+button.name+'" />\
 							  </div>'
 						toolbar += ' </div> </div>';
 					break;

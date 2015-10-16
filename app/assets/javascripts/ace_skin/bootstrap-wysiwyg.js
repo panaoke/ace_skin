@@ -88,17 +88,19 @@
 			},
 			insertFiles = function (files) {
 				editor.focus();
+                var imageFiles = []
 				$.each(files, function (idx, fileInfo) {
 					if (/^image\//.test(fileInfo.type)) {
-						$.when(FileUpload.upload(files, function(result) {
-                            execCommand('insertimage', result.url);
-                        })).fail(function (e) {
-							options.fileUploadError("file-reader", e);
-						});
+                        imageFiles.push(fileInfo);
 					} else {
 						options.fileUploadError("unsupported-file-type", fileInfo.type);
 					}
 				});
+                $.when(FileUpload.upload(imageFiles, function(result) {
+                    $.each(result.urls, function(i, url) { execCommand('insertimage', url) });
+                })).fail(function (e) {
+                    options.fileUploadError("file-reader", e);
+                });
 			},
 			markSelection = function (input, color) {
 				restoreSelection();

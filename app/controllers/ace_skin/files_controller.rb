@@ -3,7 +3,14 @@ module AceSkin
 
       def create
           # render json: {}
-        render json: {url: AceSkin::Uploader.instance.fast_upload(params[:ace_file].tempfile.path)}
+        urls = params[:ace_file].map do |file|
+          begin
+            AceSkin::Uploader.instance.fast_upload(file.tempfile.path)
+          rescue => e
+            next
+          end
+        end
+        render json: {urls: urls}
       end
 
   end

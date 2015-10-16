@@ -86,11 +86,13 @@ FileUpload = function() {
     self.url = '/ace_skin/files';
     self.type = 'POST';
 
-    self.upload = function(file, successCall, progressCall) {
+    self.upload = function(files, successCall, progressCall) {
         var formData = new FormData();
         formData.append("authenticity_token", $('input[name="authenticity_token"]').val());
         formData.append("utf8", '✓');
-        formData.append("ace_file", file[0]);
+        for(var i= 1; i <= files.length; i++) {
+            formData.append("ace_file[]", files[i-1]);
+        }
 
         $.ajax({
             url: self.url,  //server script to process data
