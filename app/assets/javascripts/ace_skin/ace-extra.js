@@ -392,9 +392,7 @@ ace.toggleClass = function(elem, className) {
 	if(ace.hasClass(elem, className))
 		ace.removeClass(elem, className);
 	else ace.addClass(elem, className);
-}
-
-
+};
 
 
 //data_storage instance used inside ace.settings etc
