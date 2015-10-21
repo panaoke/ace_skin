@@ -30,7 +30,7 @@ CsvPlugin = function(table) {
 
     self.fileName = function() {
         var gridParam = self.$table.jqGrid('getGridParam');
-        return gridParam.caption + '_' +  (new Date()).getTime(); + '.csv'
+        return (gridParam.caption + '_' +  (new Date()).getTime() + '.csv');
     }
 
     self.getGridData = function(callback) {
