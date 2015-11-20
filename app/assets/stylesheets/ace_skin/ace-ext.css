@@ -104,6 +104,12 @@ input[type=radio].ace:checked + .lbl::before {
 .ace-form .form-name .name-label {
     padding-right: 30px;
 }
+/*.modal {*/
+ /*z-index: 2;*/
+/*}*/
+.datepicker-dropdown {
+  z-index: 1040 !important;
+}
 .bootbox .modal-dialog {
     right: auto;
     left: 50%;
@@ -113,6 +119,10 @@ input[type=radio].ace:checked + .lbl::before {
     max-width: 1100px;
     padding-bottom: 30px;
     width: initial;
+    z-index: 3;
+}
+.navbar {
+ z-index: 1;
 }
 .ace-form .wysiwyg-style2 {
     padding-left: 4px;
