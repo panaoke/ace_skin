@@ -249,3 +249,11 @@ input[type=radio].ace:checked + .lbl::before {
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.alert-dialog .modal-dialog {
+    margin-top: 10%;
+}
+.alert-dialog .modal-dialog .modal-content {
+    border-color: red;
+    border-width: 2px;
+}

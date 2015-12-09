@@ -55,9 +55,13 @@
                 "label": "<i class='icon-ok'></i>" + i18n.action('create'),
                 "className": "btn-sm btn-success",
                 callback: function(e) {
-                    $(e.target).parents('.modal-content').find('form.simple_list_form').trigger('submit', function() {
-                        $(target).trigger('reloadGrid')
-                    });
+                    var $list = $(e.target).parents('.modal-content').find('form.simple_list_form.active');
+                    $list.removeClass('active');
+                    if($list.length > 0) {
+                        $list.trigger('submit', function() {
+                            $(target).trigger('reloadGrid')
+                        });
+                    }
                     return false;
                 }
             }
@@ -67,9 +71,13 @@
                 "label": "<i class='icon-ok'></i>" + i18n.action('update'),
                 "className": "btn-sm btn-success",
                 callback: function(e) {
-                    $(e.target).parents('.modal-content').find('form.simple_list_form').trigger('submit', function() {
-                        $(target).trigger('reloadGrid');
-                    });
+                    var $list = $(e.target).parents('.modal-content').find('form.simple_list_form.active');
+                    $list.removeClass('active');
+                    if($list.length > 0) {
+                        $list.trigger('submit', function() {
+                            $(target).trigger('reloadGrid')
+                        });
+                    }
                     return false;
                 }
             }
@@ -145,7 +153,6 @@
                 if(typeof(errorCallBack) == 'function') {
                     errorCallBack(request);
                 }
-
             },
             success: function(data) {
                 if(typeof(successCallBack) == 'function') {
