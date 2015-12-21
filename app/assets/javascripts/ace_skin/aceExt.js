@@ -286,7 +286,7 @@
                 toolbar: [
                     {name: 'font', title: i18n.view('rich_text', 'font')},
                     null,
-                    {name: 'fontSize', title: i18n.view('rich_text', 'fontSize'), values: {5:' 5', 3:' 3', 1:' 1'}},
+                    {name: 'fontSize', title: i18n.view('rich_text', 'fontSize'), values: {1:'1',2: '2',3: '3', 4: '4', 5:'5',6: '6', 7: '7', 8: '8', 9: '9', 10: '10'}},
                     null,
                     {name: 'bold', className: 'btn-info',title: i18n.view('rich_text', 'bold') },
                     {name: 'italic', className: 'btn-info', title: i18n.view('rich_text', 'italic') },

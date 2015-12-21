@@ -687,7 +687,7 @@ jQuery(function() {
 				title:'Font'
 			},
 			'fontSize' : {
-				values:{5:'Huge', 3:'Normal', 1:'Small'},
+				values:{1:'1',2: '2',3: '3', 4: '4', 5:'5',6: '6', 7: '7', 8: '8', 9: '9', 10: '10'},
 				icon:'icon-text-height',
 				title:'Font Size'
 			},
