@@ -86,10 +86,14 @@ FileUpload = function() {
     self.url = '/ace_skin/files';
     self.type = 'POST';
 
-    self.upload = function(files, successCall, progressCall) {
+    self.upload = function(files, successCall, progressCall, options) {
+        options = options || {};
         var formData = new FormData();
         formData.append("authenticity_token", $('input[name="authenticity_token"]').val());
         formData.append("utf8", '✓');
+        $.each(options, function(key, value) {
+            formData.append('options['+key+']', value);
+        });
         for(var i= 1; i <= files.length; i++) {
             formData.append("ace_file[]", files[i-1]);
         }

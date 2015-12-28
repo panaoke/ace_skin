@@ -20,7 +20,7 @@ module AceSkin
       file = File.open(file) if file.is_a?(String)
       file_name = file.path.split('/').last
       file_format = file_name.split('.').last
-      path = "#{@fast_upload_path}/#{(Time.now.to_f * 10**6).to_i}.#{file_format}"
+      path = "#{options[:img_path] || @fast_upload_path}/#{(Time.now.to_f * 10**6).to_i}.#{file_format}"
 
       put(path, file, options)
     end
