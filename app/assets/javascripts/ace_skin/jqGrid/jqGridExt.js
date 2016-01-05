@@ -26,6 +26,13 @@
                 setTimeout(function () {
                     updatePagerIcons(table);
                 }, 0);
+
+                if($('#simple_list_table_total_count').length == 0) {
+                    $('#simple_list_table_pager_right').append($('<div id="simple_list_table_total_count"></div>'));
+                }
+
+                $('#simple_list_table_total_count').text('所有共计: '+data.count+'条');
+
                 $(this).extPlugins();
             }
         };
