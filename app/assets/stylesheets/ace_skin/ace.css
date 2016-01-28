@@ -14368,3 +14368,6 @@ th[aria-selected=true] .ui-jqgrid-sortable {
     padding: 8px;
     margin: 0;
 }
+.ui-jqgrid-view>.ui-jqgrid-titlebar {
+    z-index: -1;
+}
