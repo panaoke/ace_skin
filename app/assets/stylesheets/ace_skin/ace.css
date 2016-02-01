@@ -14369,5 +14369,5 @@ th[aria-selected=true] .ui-jqgrid-sortable {
     margin: 0;
 }
 .ui-jqgrid-view>.ui-jqgrid-titlebar {
-    z-index: -1;
+    z-index: 0;
 }
