@@ -37,6 +37,7 @@ CsvPlugin = function(table) {
         var gridParam = self.$table.jqGrid('getGridParam');
         var postData = gridParam.postData;
         postData.rows = 1000000;
+        postData.per_page = 1000000;
         postData.page = 1;
         $.ajax({
             url: gridParam.url,
